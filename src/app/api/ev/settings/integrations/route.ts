@@ -65,18 +65,8 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const created = await prisma.integration.create({
-      data: {
-        orgId: tenant.org.id,
-        name,
-        category: provider.category,
-        providerKey: provider.key,
-        mode: provider.mode,
-        upstreamCredentialId,
-        config: config as Prisma.InputJsonValue,
-        status,
-      } as Prisma.IntegrationUncheckedCreateInput,
-    });
+    const result = await prisma.$executeRaw`INSERT INTO "Integration" (orgId, name, category, providerKey, mode, upstreamCredentialId, config, status, "createdAt", "updatedAt") VALUES (${tenant.org.id}, ${name}, ${provider.category}, ${provider.key}, ${provider.mode}, ${upstreamCredentialId}, ${JSON.stringify(config)}, ${status}, NOW(), NOW()) RETURNING *`;
+    const created = (result as unknown as any[])[0];
 
     return {
       payload: {
