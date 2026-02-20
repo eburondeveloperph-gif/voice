@@ -72,12 +72,11 @@ export async function POST(req: NextRequest) {
         category: provider.category,
         providerKey: provider.key,
         mode: provider.mode,
-        eburonProvider: (provider as any).eburonProvider ?? null,
         upstreamCredentialId,
         config: config as Prisma.InputJsonValue,
         status,
-      },
-    } as any);
+      } as Prisma.IntegrationUncheckedCreateInput,
+    });
 
     return {
       payload: {
