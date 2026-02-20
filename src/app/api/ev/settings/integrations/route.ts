@@ -1,5 +1,4 @@
 import { NextRequest } from "next/server";
-import { Prisma } from "@prisma/client";
 import { z } from "zod";
 
 import { prisma } from "@/lib/db";
@@ -66,7 +65,7 @@ export async function POST(req: NextRequest) {
     }
 
     const result = await prisma.$executeRaw`INSERT INTO "Integration" (orgId, name, category, providerKey, mode, upstreamCredentialId, config, status, "createdAt", "updatedAt") VALUES (${tenant.org.id}, ${name}, ${provider.category}, ${provider.key}, ${provider.mode}, ${upstreamCredentialId}, ${JSON.stringify(config)}, ${status}, NOW(), NOW()) RETURNING *`;
-    const created = (result as unknown as any[])[0];
+    const created = (result as unknown as any[])[0]; // eslint-disable-line @typescript-eslint/no-explicit-any
 
     return {
       payload: {
