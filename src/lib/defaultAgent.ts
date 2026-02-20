@@ -6,10 +6,10 @@
 
 export const DEFAULT_AGENT_ID = "default-agent";
 
-export const DEFAULT_AGENT_ORG_ID = "9497cd9a-d002-40d6-9b66-04fd98855f29";
+export const DEFAULT_AGENT_ORG_ID = "default-org";
 
 export const DEFAULT_AGENT_PHONE = "+1 (844) 418 2027";
-export const DEFAULT_AGENT_PHONE_ID = "8ef13ef5-c2b5-43ab-b6c6-cdde03f0ee48";
+export const DEFAULT_AGENT_PHONE_ID = "default-phone";
 
 /** Full Vapi assistant payload — kept in sync with the upstream record. */
 export const DEFAULT_AGENT = {
@@ -18,7 +18,7 @@ export const DEFAULT_AGENT = {
     name: "Stephen",
     voice: {
         voiceId: "orbit-emma",
-        provider: "vapi",
+        provider: "eburon",
     },
     createdAt: "2026-02-16T08:30:48.152Z",
     updatedAt: "2026-02-17T13:42:10.923Z",
