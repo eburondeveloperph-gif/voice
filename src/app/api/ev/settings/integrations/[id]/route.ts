@@ -46,7 +46,7 @@ export async function PATCH(req: NextRequest, context: { params: Promise<{ id: s
     const nextName = parsed.name?.trim() || existing.name;
     const nextStatus = parsed.status ? parseIntegrationStatus(parsed.status) : existing.status;
     const shouldSyncUpstream =
-      (existing.mode === "eburon_credential" as any) &&
+      (existing.mode === "eburon_credential" as any) && // eslint-disable-line @typescript-eslint/no-explicit-any
       Boolean(existing.upstreamCredentialId) &&
       Boolean(parsed.name || parsed.config);
     const shouldUpdateConfig = Boolean(parsed.config);
@@ -105,7 +105,7 @@ export async function DELETE(req: NextRequest, context: { params: Promise<{ id: 
     }
 
     const provider = getProviderDefinition(existing.providerKey);
-    if (provider?.mode === "eburon_credential" as any && existing.upstreamCredentialId) {
+    if (provider?.mode === "eburon_credential" as any && existing.upstreamCredentialId) { // eslint-disable-line @typescript-eslint/no-explicit-any
       await upstream.deleteCredential(existing.upstreamCredentialId);
     }
 

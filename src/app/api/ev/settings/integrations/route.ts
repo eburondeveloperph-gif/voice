@@ -55,8 +55,8 @@ export async function POST(req: NextRequest) {
     const status = parsed.status ? parseIntegrationStatus(parsed.status) : "active";
 
     let upstreamCredentialId: string | null = null;
-    if ((provider as any).mode === "eburon_credential") {
-      const payload = (buildEburonCredentialPayload as any)(provider, name, config);
+    if ((provider as any).mode === "eburon_credential") { // eslint-disable-line @typescript-eslint/no-explicit-any
+      const payload = (buildEburonCredentialPayload as any)(provider, name, config); // eslint-disable-line @typescript-eslint/no-explicit-any
       const remoteCredential = await upstream.createCredential(payload);
       upstreamCredentialId = extractCredentialId(remoteCredential);
 

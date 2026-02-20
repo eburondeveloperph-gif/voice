@@ -4,7 +4,7 @@ export async function getActiveAssistantCredentialIds(orgId: string): Promise<st
   const integrations = await prisma.integration.findMany({
     where: {
       orgId,
-      mode: "eburon_credential" as any,
+      mode: "eburon_credential" as any, // eslint-disable-line @typescript-eslint/no-explicit-any
       status: "active",
       upstreamCredentialId: { not: null },
     },
