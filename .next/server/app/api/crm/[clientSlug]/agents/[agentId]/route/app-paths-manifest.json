@@ -1,3 +1,0 @@
-{
-  "/api/crm/[clientSlug]/agents/[agentId]/route": "app/api/crm/[clientSlug]/agents/[agentId]/route.js"
-}

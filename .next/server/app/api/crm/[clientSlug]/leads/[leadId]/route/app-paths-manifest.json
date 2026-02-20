@@ -1,3 +1,0 @@
-{
-  "/api/crm/[clientSlug]/leads/[leadId]/route": "app/api/crm/[clientSlug]/leads/[leadId]/route.js"
-}
