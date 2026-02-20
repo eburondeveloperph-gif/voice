@@ -6,3 +6,5 @@
 [00:31:01.662] Server  ERROR   ⨯ Error: ENOENT: no such file or directory, open '/Users/master/Desktop/csr-app/.next/dev/server/app/dashboard/page/build-manifest.json'
 [00:31:04.336] Server  ERROR   ⨯ Error: ENOENT: no such file or directory, open '/Users/master/Desktop/csr-app/.next/dev/server/app/crm/page/build-manifest.json'
 [00:31:11.111] Server  ERROR   ⨯ Error: ENOENT: no such file or directory, open '/Users/master/Desktop/csr-app/.next/dev/server/app/agents/page/build-manifest.json'
+[00:15:01.804] Server  LOG       Reload env: .env.local
+[00:45:46.639] Server  LOG       Reload env: .env.local

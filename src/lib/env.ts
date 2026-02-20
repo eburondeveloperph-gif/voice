@@ -13,7 +13,7 @@ const envSchema = z.object({
   DATABASE_URL: z.string().default("file:./dev.db"),
   EV_PRIVATE_TOKEN: z.string().optional(),
   NEXT_PUBLIC_EV_WEB_KEY: z.string().optional(),
-  VAPI_DEFAULT_AGENT_ID: z.string().default("e32ec77b-bf48-412b-9d2b-857bf089eb8d"),
+  VAPI_DEFAULT_AGENT_ID: z.string().optional(),
   EV_ALLOWED_ORIGINS: z.string().default("http://localhost:3000"),
   EV_WEBHOOK_SECRET: z.string().optional(),
   EV_DEFAULT_ORG_SLUG: z.string().default("eburon-demo"),

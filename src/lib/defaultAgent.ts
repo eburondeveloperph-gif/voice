@@ -4,7 +4,7 @@
  * and when initialising new calls without an explicit assistantId.
  */
 
-export const DEFAULT_AGENT_ID = "e32ec77b-bf48-412b-9d2b-857bf089eb8d";
+export const DEFAULT_AGENT_ID = "default-agent";
 
 export const DEFAULT_AGENT_ORG_ID = "9497cd9a-d002-40d6-9b66-04fd98855f29";
 

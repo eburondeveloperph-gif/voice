@@ -1,4 +1,4 @@
-module.exports=[31773,a=>{"use strict";let b,c;var d,e=a.i(87924),f=a.i(72131),g=a.i(96226),h=a.i(75110);let i={id:"e32ec77b-bf48-412b-9d2b-857bf089eb8d",orgId:"9497cd9a-d002-40d6-9b66-04fd98855f29",name:"Stephen",voice:{voiceId:"orbit-emma",provider:"vapi"},createdAt:"2026-02-16T08:30:48.152Z",updatedAt:"2026-02-17T13:42:10.923Z",model:{model:"gpt-4o-mini",messages:[{role:"system",content:`[Identity]  
+module.exports=[31773,a=>{"use strict";let b,c;var d,e=a.i(87924),f=a.i(72131),g=a.i(96226),h=a.i(75110);let i={id:"default-agent",orgId:"9497cd9a-d002-40d6-9b66-04fd98855f29",name:"Stephen",voice:{voiceId:"orbit-emma",provider:"vapi"},createdAt:"2026-02-16T08:30:48.152Z",updatedAt:"2026-02-17T13:42:10.923Z",model:{model:"gpt-4o-mini",messages:[{role:"system",content:`[Identity]  
 You are Stephen, a business development voice assistant for Eburon Tech, a B2B software solutions provider. Your primary purpose is to identify qualified leads, understand their business challenges, and connect them with the appropriate sales representatives for solutions that match their needs.
 
 [Voice & Persona]  
