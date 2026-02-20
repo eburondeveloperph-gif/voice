@@ -1,0 +1,8 @@
+[00:00:00.603] Server  WARN    ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+[00:00:00.659] Server  LOG     ✓ Ready in 536ms
+[00:30:51.917] Server  ERROR   ⨯ Error: ENOENT: no such file or directory, open '/Users/master/Desktop/csr-app/.next/dev/server/app/numbers/page/build-manifest.json'
+[00:30:54.188] Server  ERROR   ⨯ Error: ENOENT: no such file or directory, open '/Users/master/Desktop/csr-app/.next/dev/server/app/settings/page/build-manifest.json'
+[00:30:54.919] Server  LOG     ○ Compiling /_error ...
+[00:31:01.662] Server  ERROR   ⨯ Error: ENOENT: no such file or directory, open '/Users/master/Desktop/csr-app/.next/dev/server/app/dashboard/page/build-manifest.json'
+[00:31:04.336] Server  ERROR   ⨯ Error: ENOENT: no such file or directory, open '/Users/master/Desktop/csr-app/.next/dev/server/app/crm/page/build-manifest.json'
+[00:31:11.111] Server  ERROR   ⨯ Error: ENOENT: no such file or directory, open '/Users/master/Desktop/csr-app/.next/dev/server/app/agents/page/build-manifest.json'

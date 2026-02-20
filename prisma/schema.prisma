@@ -1,0 +1,354 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Org {
+  id              String            @id @default(cuid())
+  name            String
+  slug            String            @unique
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  users           User[]
+  integrations    Integration[]
+  agents          Agent[]
+  callLogs        CallLog[]
+  contacts        Contact[]
+  billingLedger   BillingLedger[]
+  phoneNumbers    PhoneNumber[]
+  crmProjects     CrmProject[]
+  crmLeads        CrmLead[]
+  crmActivities   CrmActivity[]
+  crmFiles        CrmFile[]
+  gatewayLogs     GatewayAuditLog[]
+  previewSessions PreviewSession[]
+}
+
+model User {
+  id          String            @id @default(cuid())
+  orgId       String
+  email       String
+  displayName String?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  org         Org               @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  agents      Agent[]           @relation("AgentOwner")
+  crmProjects CrmProject[]      @relation("CrmProjectOwner")
+  logs        GatewayAuditLog[]
+  previews    PreviewSession[]
+
+  @@unique([orgId, email])
+  @@index([orgId])
+}
+
+model VoiceCatalog {
+  id               String   @id
+  label            String
+  locale           String
+  upstreamProvider String
+  upstreamVoiceId  String
+  previewSampleUrl String?
+  isApproved       Boolean  @default(true)
+  sortOrder        Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  agents           Agent[]
+}
+
+model Agent {
+  id              String       @id @default(cuid())
+  orgId           String
+  createdById     String?
+  name            String
+  intro           String
+  firstMessageMode String      @default("assistant-speaks-first")
+  systemPrompt    String
+  voiceId         String
+  vapiAssistantId String?      @unique
+  status          AgentStatus  @default(draft)
+  isLocked        Boolean      @default(false)
+  deployedAt      DateTime?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  org             Org          @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  createdBy       User?        @relation("AgentOwner", fields: [createdById], references: [id], onDelete: SetNull)
+  voice           VoiceCatalog @relation(fields: [voiceId], references: [id], onDelete: Restrict)
+  callLogs        CallLog[]
+  previewSessions PreviewSession[]
+  phoneNumbers    PhoneNumber[]
+
+  @@index([orgId, status])
+  @@index([orgId, updatedAt])
+}
+
+enum AgentStatus {
+  draft
+  deployed
+}
+
+enum CallSource {
+  preview
+  production
+  sync
+}
+
+model CallLog {
+  id              String     @id @default(cuid())
+  orgId           String
+  agentId         String?
+  vapiCallId      String     @unique
+  fromNumber      String?
+  toNumber        String?
+  startedAt       DateTime?
+  endedAt         DateTime?
+  durationSeconds Int?
+  costUsd         Float?
+  status          String
+  direction       String?
+  transcript      Json?
+  recordingUrl    String?
+  metadata        Json?
+  source          CallSource @default(sync)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  org             Org        @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  agent           Agent?     @relation(fields: [agentId], references: [id], onDelete: SetNull)
+
+  @@index([orgId, startedAt])
+  @@index([orgId, status])
+  @@index([orgId, agentId])
+}
+
+model Contact {
+  id          String   @id @default(cuid())
+  orgId       String
+  fullName    String
+  phoneNumber String
+  email       String?
+  tags        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  org         Org      @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  @@unique([orgId, phoneNumber])
+  @@index([orgId, fullName])
+}
+
+enum BillingEntryType {
+  credit
+  usage
+  number_purchase
+  adjustment
+}
+
+enum IntegrationMode {
+  eburon_credential
+  local_config
+}
+
+enum IntegrationStatus {
+  active
+  disabled
+}
+
+model Integration {
+  id                 String            @id @default(cuid())
+  orgId              String
+  name               String
+  category           String
+  providerKey        String
+  mode               IntegrationMode
+  eburonProvider       String?
+  upstreamCredentialId String?         @unique
+  config             Json?
+  status             IntegrationStatus @default(active)
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  org                Org               @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  @@index([orgId, providerKey])
+  @@index([orgId, category])
+  @@index([orgId, status])
+}
+
+model BillingLedger {
+  id          String           @id @default(cuid())
+  orgId       String
+  entryType   BillingEntryType
+  amountCents Int
+  description String
+  referenceId String?
+  metadata    Json?
+  createdAt   DateTime         @default(now())
+  org         Org              @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  @@index([orgId, createdAt])
+}
+
+enum PhoneNumberStatus {
+  pending
+  active
+  suspended
+  released
+}
+
+model PhoneNumber {
+  id              String            @id @default(cuid())
+  orgId           String
+  displayNumber   String
+  vapiPhoneNumberId String?         @unique
+  assignedAgentId String?
+  status          PhoneNumberStatus @default(pending)
+  monthlyPriceCents Int             @default(1500)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  org             Org               @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  assignedAgent   Agent?            @relation(fields: [assignedAgentId], references: [id], onDelete: SetNull)
+
+  @@unique([orgId, displayNumber])
+  @@index([orgId, status])
+}
+
+enum CrmLeadStage {
+  new
+  contacted
+  qualified
+  proposal
+  won
+  lost
+}
+
+enum CrmActivityType {
+  note
+  call
+  email
+  meeting
+  status_change
+  file
+}
+
+model CrmProject {
+  id            String        @id @default(cuid())
+  orgId         String
+  createdById   String?
+  name          String
+  slug          String        @unique
+  customDomain  String?       @unique
+  description   String?
+  allowedEmails String?
+  logoUrl       String?
+  embedStatus   String        @default("disabled")
+  isActive      Boolean       @default(true)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  org           Org           @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  createdBy     User?         @relation("CrmProjectOwner", fields: [createdById], references: [id], onDelete: SetNull)
+  leads         CrmLead[]
+  activities    CrmActivity[]
+  files         CrmFile[]
+
+  @@index([orgId, updatedAt])
+  @@index([orgId, isActive])
+}
+
+model CrmLead {
+  id          String        @id @default(cuid())
+  orgId       String
+  projectId   String
+  fullName    String
+  email       String?
+  phone       String?
+  company     String?
+  stage       CrmLeadStage  @default(new)
+  source      String?
+  ownerEmail  String?
+  notes       String?
+  metadata    Json?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  org         Org           @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  project     CrmProject    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  activities  CrmActivity[]
+  files       CrmFile[]
+
+  @@index([orgId, projectId, updatedAt])
+  @@index([projectId, stage])
+}
+
+model CrmActivity {
+  id            String          @id @default(cuid())
+  orgId         String
+  projectId     String
+  leadId        String?
+  type          CrmActivityType
+  summary       String
+  metadata      Json?
+  createdByEmail String?
+  createdAt     DateTime        @default(now())
+  org           Org             @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  project       CrmProject      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  lead          CrmLead?        @relation(fields: [leadId], references: [id], onDelete: SetNull)
+
+  @@index([orgId, projectId, createdAt])
+  @@index([projectId, leadId, createdAt])
+}
+
+model CrmFile {
+  id              String      @id @default(cuid())
+  orgId           String
+  projectId       String
+  leadId          String?
+  fileName        String
+  contentType     String?
+  sizeBytes       Int
+  storagePath     String
+  publicUrl       String?
+  uploadedByEmail String?
+  createdAt       DateTime    @default(now())
+  org             Org         @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  project         CrmProject  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  lead            CrmLead?    @relation(fields: [leadId], references: [id], onDelete: SetNull)
+
+  @@index([orgId, projectId, createdAt])
+  @@index([projectId, leadId, createdAt])
+}
+
+model PreviewSession {
+  id        String   @id @default(cuid())
+  orgId     String
+  agentId   String
+  userId    String?
+  startedAt DateTime @default(now())
+  endedAt   DateTime?
+  status    String
+  transcript Json?
+  org       Org      @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  agent     Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([orgId, agentId, startedAt])
+}
+
+model GatewayAuditLog {
+  id          String   @id @default(cuid())
+  orgId       String
+  userId      String?
+  requestType String
+  resourceId  String?
+  method      String
+  path        String
+  statusCode  Int
+  success     Boolean
+  ipAddress   String?
+  userAgent   String?
+  createdAt   DateTime @default(now())
+  org         Org      @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([orgId, createdAt])
+  @@index([orgId, userId, createdAt])
+  @@index([orgId, requestType, createdAt])
+}

@@ -1,0 +1,67 @@
+.microphone-orb {
+  width: 48px;
+  height: 48px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orb-core {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b59ab, #2563eb);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.orb-core.active {
+  background: linear-gradient(135deg, #e1502e, #dc2626);
+  box-shadow: 0 0 20px rgba(225, 80, 46, 0.4);
+}
+
+.orb-inner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.orb-pulse {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(225, 80, 46, 0.6);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.microphone-orb.idle .orb-core {
+  background: linear-gradient(135deg, #6b7280, #4b5563);
+}
+
+.audio-visualizer {
+  display: block;
+  border-radius: 4px;
+}

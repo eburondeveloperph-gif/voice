@@ -1,0 +1,1469 @@
+:root {
+  --bg: #000000;
+  --bg-soft: #0a0a0a;
+  --card: rgba(14, 14, 14, 0.92);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --text: #ffffff;
+  --muted: #a1a1aa;
+  --accent: #e1502e;
+  --accent-2: #3b59ab;
+  --danger: #ef4444;
+  --shadow: 0 14px 40px rgba(0, 0, 0, 0.4);
+  --gradient: linear-gradient(135deg, #e1502e, #3b59ab);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family: var(--font-body), "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background: #000000;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  transition: grid-template-columns 180ms ease;
+}
+
+.shell.sidebarCollapsed {
+  grid-template-columns: 86px 1fr;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 18px;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(8, 8, 8, 0.96);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  transition: padding 180ms ease;
+}
+
+.sidebar.collapsed {
+  padding: 24px 10px;
+}
+
+.brandPanel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.brandBadge {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.brandBadge img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.brandCopy {
+  min-width: 0;
+}
+
+.brandName {
+  margin: 0;
+  font-family: var(--font-heading), "Inter", sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.brandSub {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}
+
+.sidebarToggle {
+  margin-left: auto;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.sidebar.collapsed .brandCopy {
+  display: none;
+}
+
+.sidebarNav {
+  display: grid;
+  gap: 4px;
+  flex: 1;
+  align-content: start;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: var(--muted);
+  font-size: 14px;
+  transition: 160ms ease;
+}
+
+.navIcon {
+  width: 16px;
+  text-align: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.navText {
+  white-space: nowrap;
+}
+
+.navLink:hover {
+  color: var(--text);
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.navLink.active {
+  color: #ffffff;
+  font-weight: 600;
+  background: var(--gradient);
+}
+
+.sidebar.collapsed .navLink {
+  justify-content: center;
+  padding: 10px 8px;
+}
+
+.sidebar.collapsed .navText {
+  display: none;
+}
+
+.sidebarFooter {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebarUserEmail {
+  margin: 0 0 10px;
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebarLogoutButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.sidebarLogoutButton:hover {
+  color: var(--text);
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.sidebar.collapsed .sidebarLogoutButton {
+  justify-content: center;
+  padding: 10px 8px;
+}
+
+.authLoading {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.authRoot {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  overflow: hidden;
+  background:
+    radial-gradient(1000px 540px at -10% -20%, rgba(225, 80, 46, 0.2), transparent 55%),
+    radial-gradient(960px 540px at 110% 0%, rgba(59, 89, 171, 0.24), transparent 50%),
+    #020202;
+}
+
+.authGlow {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(70px);
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+.authGlowA {
+  width: 320px;
+  height: 320px;
+  left: 6%;
+  top: 8%;
+  background: #e1502e;
+}
+
+.authGlowB {
+  width: 360px;
+  height: 360px;
+  right: 6%;
+  bottom: 4%;
+  background: #3b59ab;
+}
+
+.authShell {
+  position: relative;
+  z-index: 1;
+  width: min(980px, 100%);
+  display: grid;
+  grid-template-columns: 1fr minmax(340px, 440px);
+  gap: 16px;
+}
+
+.authResetShell {
+  width: min(920px, 100%);
+}
+
+.authShellSingle {
+  width: min(560px, 100%);
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.authSinglePanel {
+  position: relative;
+  padding: 26px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background:
+    radial-gradient(140% 160% at 0% 0%, rgba(225, 80, 46, 0.18), transparent 52%),
+    radial-gradient(120% 130% at 100% 0%, rgba(59, 89, 171, 0.22), transparent 48%),
+    rgba(10, 10, 10, 0.88);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+.authSinglePanel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.authSingleHeader {
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.authSingleBrand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.authSingleTitle {
+  margin: 4px 0 0;
+  font-family: var(--font-heading), "Inter", sans-serif;
+  font-size: clamp(28px, 5vw, 36px);
+  line-height: 1.1;
+}
+
+.authSingleSubtitle {
+  margin: 14px 0 0;
+  color: rgba(255, 255, 255, 0.84);
+  line-height: 1.5;
+}
+
+.authBrandPanel {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 28px;
+  background: linear-gradient(160deg, rgba(225, 80, 46, 0.16), rgba(59, 89, 171, 0.2));
+  box-shadow: var(--shadow);
+}
+
+.authBrandLockup {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.authBrandBadge {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.authEyebrow {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.authHeading {
+  margin: 4px 0 0;
+  font-family: var(--font-heading), "Inter", sans-serif;
+  font-size: clamp(28px, 5vw, 44px);
+  line-height: 1.1;
+}
+
+.authBrandText {
+  margin: 24px 0 0;
+  max-width: 46ch;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.5;
+}
+
+.authCardPanel {
+  align-self: center;
+}
+
+.authModeTabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.authModeButton {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+}
+
+.authModeButton.active {
+  color: #ffffff;
+  border-color: transparent;
+  background: var(--gradient);
+}
+
+.authFormTitle {
+  margin: 0;
+  font-family: var(--font-heading), "Inter", sans-serif;
+  font-size: 26px;
+}
+
+.authFormCopy {
+  margin: 10px 0 16px;
+}
+
+.authForm {
+  display: grid;
+  gap: 11px;
+}
+
+.authAuxActions {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.authAuxButton {
+  width: auto;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+.authStatus {
+  margin-top: 14px;
+}
+
+.authLink {
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.6);
+  text-underline-offset: 2px;
+}
+
+.content {
+  padding: 24px 26px 90px;
+}
+
+.pageHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.pageTitle {
+  margin: 0;
+  font-family: var(--font-heading), "Inter", sans-serif;
+  letter-spacing: -0.01em;
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 700;
+}
+
+.pageSubtitle {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.sectionGrid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.card {
+  border: 1px solid var(--card-border);
+  background: var(--card);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+
+.card h3,
+.card h4 {
+  margin: 0;
+  font-family: var(--font-heading), "Inter", sans-serif;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.metricCard {
+  grid-column: span 3;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.metricValue {
+  font-family: var(--font-heading), "Inter", sans-serif;
+  font-size: clamp(24px, 4vw, 36px);
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 10px 8px;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+th {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.badge {
+  padding: 4px 8px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge.live {
+  color: #ffffff;
+  background: linear-gradient(135deg, #e1502e, #c43a1a);
+}
+
+.badge.draft {
+  color: #a1a1aa;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.badge.idle {
+  color: #a1a1aa;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.fieldGrid {
+  display: grid;
+  gap: 12px;
+}
+
+label {
+  font-size: 13px;
+  color: var(--muted);
+  display: grid;
+  gap: 8px;
+}
+
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  padding: 10px 12px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(225, 80, 46, 0.15);
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #ffffff;
+  background: var(--gradient);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+}
+
+button.warn {
+  background: linear-gradient(135deg, #e1502e, #c43a1a);
+  color: #ffffff;
+}
+
+button.ghost {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.inlineActions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.stepTabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.stepTab {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+.stepTab.active {
+  color: #ffffff;
+  background: var(--gradient);
+  border-color: transparent;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 14px;
+}
+
+.crmPortalRoot {
+  min-height: 100vh;
+  padding: 28px;
+  background:
+    radial-gradient(1200px 600px at -10% -10%, rgba(225, 80, 46, 0.16), transparent 50%),
+    radial-gradient(900px 500px at 110% 0%, rgba(59, 89, 171, 0.2), transparent 45%),
+    #040404;
+}
+
+.crmPortalCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #09090b;
+}
+
+.crmPortalNoticeCard {
+  width: 100%;
+  max-width: 500px;
+}
+
+.crmTextCenter {
+  text-align: center;
+}
+
+.crmAuthCard {
+  width: min(760px, 100%);
+}
+
+.crmAuthCardCompact {
+  max-width: 440px;
+}
+
+.crmAuthHeader {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.crmAuthLogo {
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.crmAuthTitle {
+  margin: 0;
+  font-family: var(--font-heading), "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.crmAuthSubtitle {
+  margin-top: 8px;
+}
+
+.crmAuthForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.crmAuthStatus {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.crmDashboardLayout {
+  min-height: 100vh;
+  display: flex;
+  color: #ededed;
+  background: #09090b;
+}
+
+.crmSidebar {
+  width: 280px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  background: rgba(8, 8, 8, 0.88);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.crmSidebarBrand {
+  margin-bottom: 40px;
+  padding-left: 8px;
+}
+
+.crmSidebarLogo {
+  width: auto;
+  height: 32px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  object-fit: contain;
+}
+
+.crmSidebarName {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: var(--font-heading), "Inter", sans-serif;
+}
+
+.crmSidebarSlug {
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.crmSidebarDescription {
+  margin: 10px 0 0;
+  font-size: 12px;
+  max-width: 240px;
+  line-height: 1.45;
+}
+
+.crmSidebarNav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.crmSidebarTab {
+  all: unset;
+  box-sizing: border-box;
+  display: block;
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.crmSidebarTab:hover {
+  background: rgba(255, 255, 255, 0.03);
+  color: #ffffff;
+}
+
+.crmSidebarTab.isActive {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
+
+.crmSidebarFooter {
+  margin-top: auto;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.crmSidebarEmail {
+  padding: 0 8px;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 12px;
+  word-break: break-all;
+}
+
+.crmMain {
+  flex: 1;
+  padding: 48px 64px;
+  overflow-y: auto;
+}
+
+.crmTopBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.crmTopTitle {
+  margin: 0;
+  text-transform: capitalize;
+  font-size: 28px;
+  font-weight: 600;
+  font-family: var(--font-heading), "Inter", sans-serif;
+}
+
+.crmTopSubtitle {
+  margin: 4px 0 0;
+  max-width: 680px;
+}
+
+.crmTopStatus {
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.crmStack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.crmStackLg {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.crmMetricGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.crmMetricCardWide {
+  padding: 24px;
+}
+
+.crmMetricLabel {
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.crmMetricValueStrong {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.crmCardPadded {
+  padding: 24px;
+}
+
+.crmCardHeading {
+  margin: 0 0 20px;
+  font-size: 16px;
+}
+
+.crmQuickLeadGrid {
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.crmActionsEnd {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.crmTableWrapFlush {
+  margin: 0;
+}
+
+.crmTableWide {
+  min-width: 800px;
+}
+
+.crmTableHeadSmall {
+  font-size: 13px;
+}
+
+.crmRowCompact {
+  font-size: 14px;
+}
+
+.crmLeadName {
+  font-weight: 500;
+}
+
+.crmStageSelect {
+  border: none;
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 13px;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.crmTableEmpty {
+  text-align: center;
+  padding: 32px;
+}
+
+.crmFileUploadCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.crmFileInputGrow {
+  flex: 1;
+  max-width: none;
+}
+
+.crmFileLink {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.crmFileLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.crmSettingsStack {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.crmSettingsCard {
+  padding: 32px;
+}
+
+.crmSettingsHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.crmSettingsTitle {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.crmSettingsHelp {
+  margin: 0;
+  font-size: 14px;
+  max-width: 450px;
+  line-height: 1.5;
+}
+
+.crmEmbedStatusPill {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.crmEmbedStatusPill.isApproved {
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.14);
+}
+
+.crmEmbedStatusPill.isRequested {
+  color: #facc15;
+  background: rgba(250, 204, 21, 0.14);
+}
+
+.crmEmbedStatusValue {
+  color: inherit;
+}
+
+.crmSettingsDivider {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.crmEmbedPending {
+  padding: 16px;
+  border-radius: 8px;
+  background-color: rgba(234, 179, 8, 0.1);
+  border: 1px solid rgba(234, 179, 8, 0.2);
+}
+
+.crmEmbedPendingTitle {
+  margin: 0;
+  color: #facc15;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.crmEmbedPendingCopy {
+  margin: 8px 0 0;
+  color: rgba(250, 204, 21, 0.7);
+  font-size: 13px;
+}
+
+.crmSnippetTitle {
+  margin: 0 0 16px;
+  font-size: 14px;
+}
+
+.crmSnippetWrap {
+  position: relative;
+}
+
+.crmSnippetCode {
+  margin: 0;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.3);
+  color: var(--accent);
+  font-size: 13px;
+  overflow-x: auto;
+}
+
+.crmSnippetCopyButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  font-size: 11px;
+}
+
+.crmButtonFull {
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.crmButtonSmall {
+  font-size: 13px;
+}
+
+.crmInputWide {
+  min-width: 280px;
+}
+
+.crmAudioPlayer {
+  max-width: 220px;
+}
+
+.crmAgentGrid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.crmVoiceSelectGroup {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.crmInputGrow {
+  flex: 1;
+}
+
+.crmInputHint {
+  margin: 8px 0 0;
+  font-size: 12px;
+}
+
+.crmFieldFull {
+  grid-column: 1 / -1;
+}
+
+.crmTopGap {
+  margin-top: 16px;
+}
+
+.crmTopGapSmall {
+  margin-top: 14px;
+}
+
+.crmInputSearch {
+  max-width: 320px;
+}
+
+.crmSettingsStack {
+  max-width: 980px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.crmLogoUpload {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.crmCompanyLogoLarge {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.crmCompanyLogoPlaceholder {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  border: 1px dashed rgba(255, 255, 255, 0.16);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.crmLogoActions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.crmBillingGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.crmBillingCard {
+  padding: 14px;
+}
+
+.crmBillingLabel {
+  font-size: 12px;
+}
+
+.crmBillingValue {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.crmPhoneGrid {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.adminContainer {
+  margin: 0 auto;
+  max-width: 980px;
+  padding: 48px 32px;
+}
+
+.adminHeader {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 24px;
+}
+
+.adminError {
+  color: var(--red);
+  margin-top: 1rem;
+}
+
+.adminSection {
+  margin-top: 32px;
+}
+
+.adminEmptyCard {
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.adminActionsHead {
+  text-align: right;
+}
+
+.adminOrgName {
+  font-weight: 500;
+}
+
+.adminProjectSlug {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.adminStatusBadge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.adminStatusApproved {
+  background-color: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+}
+
+.adminStatusRequested {
+  background-color: rgba(234, 179, 8, 0.15);
+  color: #facc15;
+}
+
+.adminActionsCell {
+  text-align: right;
+}
+
+.adminActionsRow {
+  justify-content: flex-end;
+}
+
+.adminBtnSmall {
+  padding: 6px 14px;
+  font-size: 12px;
+}
+
+.adminBtnDeny {
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}
+
+
+
+.crmUploadInput {
+  max-width: 360px;
+}
+
+.inlineActionsCenter {
+  align-items: center;
+}
+
+.phoneMock {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(14, 14, 14, 0.96), rgba(8, 8, 8, 0.94));
+  padding: 14px;
+}
+
+.phoneState {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.transcriptList {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  min-height: 190px;
+  max-height: 280px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 10px;
+}
+
+.transcriptItem {
+  margin-bottom: 8px;
+  padding: 8px;
+  border-radius: 10px;
+  background: rgba(225, 80, 46, 0.08);
+}
+
+.transcriptItem.me {
+  background: rgba(59, 89, 171, 0.12);
+}
+
+.kicker {
+  margin: 0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.bottomNav {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .content {
+    padding: 20px 14px 90px;
+  }
+
+  .split {
+    grid-template-columns: 1fr;
+  }
+
+  .metricCard {
+    grid-column: span 6;
+  }
+
+  .crmDashboardLayout {
+    flex-direction: column;
+  }
+
+  .crmSidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 16px;
+  }
+
+  .crmSidebarBrand {
+    margin-bottom: 14px;
+    padding-left: 0;
+  }
+
+  .crmSidebarNav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .crmSidebarTab {
+    flex: 1 1 calc(50% - 6px);
+    text-align: center;
+  }
+
+  .crmSidebarFooter {
+    margin-top: 10px;
+    padding-top: 14px;
+  }
+
+  .crmMain {
+    padding: 24px 16px 28px;
+  }
+
+  .crmTopBar {
+    margin-bottom: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .crmQuickLeadGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .crmFileUploadCard {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .crmSettingsCard {
+    padding: 24px;
+  }
+
+  .crmSettingsHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .bottomNav {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.94);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    padding: 8px;
+    gap: 6px;
+  }
+
+  .bottomLink {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    text-align: center;
+    color: var(--muted);
+    border-radius: 8px;
+    padding: 8px 4px;
+  }
+
+  .bottomIcon {
+    font-size: 13px;
+    line-height: 1;
+  }
+
+  .bottomText {
+    font-size: 10px;
+    line-height: 1;
+  }
+
+  .bottomLink.active {
+    color: #ffffff;
+    background: var(--gradient);
+    font-weight: 600;
+  }
+
+  .authRoot {
+    padding: 14px;
+  }
+
+  .authShell {
+    grid-template-columns: 1fr;
+  }
+
+  .authShellSingle {
+    width: 100%;
+  }
+
+  .authSinglePanel {
+    padding: 18px;
+  }
+
+  .authSingleSubtitle {
+    margin-top: 12px;
+    font-size: 14px;
+  }
+
+  .authBrandPanel {
+    padding: 18px;
+  }
+
+  .authHeading {
+    font-size: clamp(24px, 8vw, 34px);
+  }
+}
+
+@media (max-width: 720px) {
+  .metricCard {
+    grid-column: span 12;
+  }
+
+  .crmPortalRoot {
+    padding: 14px;
+  }
+
+  .crmPortalCenter {
+    padding: 14px;
+  }
+
+  .crmMetricGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .crmSidebarTab {
+    flex-basis: 100%;
+  }
+}
