@@ -1,0 +1,42 @@
+{
+  "name": "dashboard-admincsr",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "predev": "prisma generate",
+    "dev": "next dev",
+    "prebuild": "prisma generate",
+    "build": "next build",
+    "start": "next start",
+    "postinstall": "prisma generate",
+    "lint": "eslint",
+    "prisma:generate": "prisma generate",
+    "db:push": "bash scripts/init_db.sh",
+    "db:seed": "prisma db seed",
+    "db:reset": "rm -f dev.db && npm run db:push && npm run db:seed"
+  },
+  "dependencies": {
+    "@prisma/adapter-better-sqlite3": "^7.4.1",
+    "@prisma/client": "^7.4.1",
+    "@supabase/ssr": "^0.8.0",
+    "@supabase/supabase-js": "^2.97.0",
+    "@vapi-ai/web": "^2.5.2",
+    "better-sqlite3": "^12.6.2",
+    "date-fns": "^4.1.0",
+    "next": "16.1.6",
+    "prisma": "^7.4.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "babel-plugin-react-compiler": "1.0.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "tsx": "^4.21.0",
+    "typescript": "^5"
+  }
+}

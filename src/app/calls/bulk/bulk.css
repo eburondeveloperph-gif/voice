@@ -1,0 +1,45 @@
+.bulkPage {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.bulkCard {
+    padding: 2.5rem;
+}
+
+.uploadZone {
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 16px;
+    text-align: center;
+    transition: border-color 0.2s;
+    cursor: pointer;
+}
+
+.uploadZone:hover {
+    border-color: var(--accent);
+}
+
+.uploadZone input[type="file"] {
+    margin-top: 1rem;
+    background: transparent;
+    border: none;
+}
+
+.uploadHint {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.previewTable {
+    margin-top: 1.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.previewTable table td {
+    border: none;
+    font-size: 0.85rem;
+}
