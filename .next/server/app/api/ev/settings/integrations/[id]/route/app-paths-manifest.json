@@ -1,0 +1,3 @@
+{
+  "/api/ev/settings/integrations/[id]/route": "app/api/ev/settings/integrations/[id]/route.js"
+}

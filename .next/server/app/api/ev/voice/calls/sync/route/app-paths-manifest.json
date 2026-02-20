@@ -1,0 +1,3 @@
+{
+  "/api/ev/voice/calls/sync/route": "app/api/ev/voice/calls/sync/route.js"
+}

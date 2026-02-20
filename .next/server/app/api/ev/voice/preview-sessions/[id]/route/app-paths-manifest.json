@@ -1,0 +1,3 @@
+{
+  "/api/ev/voice/preview-sessions/[id]/route": "app/api/ev/voice/preview-sessions/[id]/route.js"
+}

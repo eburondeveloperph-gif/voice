@@ -1,0 +1,3 @@
+{
+  "/api/ev/voice/agents/[id]/deploy/route": "app/api/ev/voice/agents/[id]/deploy/route.js"
+}

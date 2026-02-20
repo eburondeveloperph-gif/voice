@@ -5,7 +5,7 @@ import { z } from "zod";
 import { prisma } from "@/lib/db";
 import { runGatewayHandler, runGatewayOptions } from "@/lib/ev/handler";
 import {
-  buildVapiCredentialPayload,
+  buildEburonCredentialPayload,
   getProviderDefinition,
   normalizeIntegrationConfig,
   parseIntegrationStatus,
@@ -55,8 +55,8 @@ export async function POST(req: NextRequest) {
     const status = parsed.status ? parseIntegrationStatus(parsed.status) : "active";
 
     let upstreamCredentialId: string | null = null;
-    if (provider.mode === "vapi_credential") {
-      const payload = buildVapiCredentialPayload(provider, name, config);
+    if ((provider as any).mode === "eburon_credential") {
+      const payload = buildEburonCredentialPayload(provider, name, config);
       const remoteCredential = await upstream.createCredential(payload);
       upstreamCredentialId = extractCredentialId(remoteCredential);
 
@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
         category: provider.category,
         providerKey: provider.key,
         mode: provider.mode,
-        vapiProvider: provider.vapiProvider ?? null,
+        eburonProvider: (provider.eburonProvider as any) ?? null,
         upstreamCredentialId,
         config: config as Prisma.InputJsonValue,
         status,

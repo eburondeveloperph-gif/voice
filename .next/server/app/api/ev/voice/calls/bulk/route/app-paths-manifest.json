@@ -1,0 +1,3 @@
+{
+  "/api/ev/voice/calls/bulk/route": "app/api/ev/voice/calls/bulk/route.js"
+}

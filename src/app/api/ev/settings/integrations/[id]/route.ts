@@ -5,7 +5,7 @@ import { z } from "zod";
 import { prisma } from "@/lib/db";
 import { runGatewayHandler, runGatewayOptions } from "@/lib/ev/handler";
 import {
-  buildVapiCredentialPayload,
+  buildEburonCredentialPayload,
   getProviderDefinition,
   normalizeIntegrationConfig,
   parseIntegrationStatus,
@@ -45,9 +45,10 @@ export async function PATCH(req: NextRequest, context: { params: Promise<{ id: s
 
     const nextName = parsed.name?.trim() || existing.name;
     const nextStatus = parsed.status ? parseIntegrationStatus(parsed.status) : existing.status;
-    const shouldSyncUpstream = existing.mode === "vapi_credential"
-      && Boolean(existing.upstreamCredentialId)
-      && Boolean(parsed.name || parsed.config);
+    const shouldSyncUpstream =
+      (existing.mode === "eburon_credential" as any) &&
+      Boolean(existing.upstreamCredentialId) &&
+      Boolean(parsed.name || parsed.config);
     const shouldUpdateConfig = Boolean(parsed.config);
 
     let normalizedConfig: Record<string, unknown> | null = null;
@@ -64,7 +65,7 @@ export async function PATCH(req: NextRequest, context: { params: Promise<{ id: s
     }
 
     if (shouldSyncUpstream && existing.upstreamCredentialId) {
-      const payload = buildVapiCredentialPayload(provider, nextName, normalizedConfig ?? {});
+      const payload = buildEburonCredentialPayload(provider, nextName, normalizedConfig ?? {});
       await upstream.updateCredential(existing.upstreamCredentialId, payload);
     }
 
@@ -103,7 +104,8 @@ export async function DELETE(req: NextRequest, context: { params: Promise<{ id: 
       throw Object.assign(new Error("Integration not found."), { status: 404 });
     }
 
-    if (existing.mode === "vapi_credential" && existing.upstreamCredentialId) {
+    const provider = getProviderDefinition(existing.providerKey);
+    if (provider?.mode === "eburon_credential" as any && existing.upstreamCredentialId) {
       await upstream.deleteCredential(existing.upstreamCredentialId);
     }
 

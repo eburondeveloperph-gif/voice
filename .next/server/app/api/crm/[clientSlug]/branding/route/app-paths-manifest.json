@@ -1,0 +1,3 @@
+{
+  "/api/crm/[clientSlug]/branding/route": "app/api/crm/[clientSlug]/branding/route.js"
+}

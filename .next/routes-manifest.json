@@ -1,0 +1,431 @@
+{
+  "version": 3,
+  "pages404": true,
+  "appType": "app",
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/api/crm/[clientSlug]",
+      "regex": "^/api/crm/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPclientSlug": "nxtPclientSlug"
+      },
+      "namedRegex": "^/api/crm/(?<nxtPclientSlug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/crm/[clientSlug]/agents",
+      "regex": "^/api/crm/([^/]+?)/agents(?:/)?$",
+      "routeKeys": {
+        "nxtPclientSlug": "nxtPclientSlug"
+      },
+      "namedRegex": "^/api/crm/(?<nxtPclientSlug>[^/]+?)/agents(?:/)?$"
+    },
+    {
+      "page": "/api/crm/[clientSlug]/agents/[agentId]",
+      "regex": "^/api/crm/([^/]+?)/agents/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPclientSlug": "nxtPclientSlug",
+        "nxtPagentId": "nxtPagentId"
+      },
+      "namedRegex": "^/api/crm/(?<nxtPclientSlug>[^/]+?)/agents/(?<nxtPagentId>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/crm/[clientSlug]/billing",
+      "regex": "^/api/crm/([^/]+?)/billing(?:/)?$",
+      "routeKeys": {
+        "nxtPclientSlug": "nxtPclientSlug"
+      },
+      "namedRegex": "^/api/crm/(?<nxtPclientSlug>[^/]+?)/billing(?:/)?$"
+    },
+    {
+      "page": "/api/crm/[clientSlug]/bootstrap",
+      "regex": "^/api/crm/([^/]+?)/bootstrap(?:/)?$",
+      "routeKeys": {
+        "nxtPclientSlug": "nxtPclientSlug"
+      },
+      "namedRegex": "^/api/crm/(?<nxtPclientSlug>[^/]+?)/bootstrap(?:/)?$"
+    },
+    {
+      "page": "/api/crm/[clientSlug]/branding",
+      "regex": "^/api/crm/([^/]+?)/branding(?:/)?$",
+      "routeKeys": {
+        "nxtPclientSlug": "nxtPclientSlug"
+      },
+      "namedRegex": "^/api/crm/(?<nxtPclientSlug>[^/]+?)/branding(?:/)?$"
+    },
+    {
+      "page": "/api/crm/[clientSlug]/calls",
+      "regex": "^/api/crm/([^/]+?)/calls(?:/)?$",
+      "routeKeys": {
+        "nxtPclientSlug": "nxtPclientSlug"
+      },
+      "namedRegex": "^/api/crm/(?<nxtPclientSlug>[^/]+?)/calls(?:/)?$"
+    },
+    {
+      "page": "/api/crm/[clientSlug]/files",
+      "regex": "^/api/crm/([^/]+?)/files(?:/)?$",
+      "routeKeys": {
+        "nxtPclientSlug": "nxtPclientSlug"
+      },
+      "namedRegex": "^/api/crm/(?<nxtPclientSlug>[^/]+?)/files(?:/)?$"
+    },
+    {
+      "page": "/api/crm/[clientSlug]/leads",
+      "regex": "^/api/crm/([^/]+?)/leads(?:/)?$",
+      "routeKeys": {
+        "nxtPclientSlug": "nxtPclientSlug"
+      },
+      "namedRegex": "^/api/crm/(?<nxtPclientSlug>[^/]+?)/leads(?:/)?$"
+    },
+    {
+      "page": "/api/crm/[clientSlug]/leads/[leadId]",
+      "regex": "^/api/crm/([^/]+?)/leads/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPclientSlug": "nxtPclientSlug",
+        "nxtPleadId": "nxtPleadId"
+      },
+      "namedRegex": "^/api/crm/(?<nxtPclientSlug>[^/]+?)/leads/(?<nxtPleadId>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/crm/[clientSlug]/phone-numbers",
+      "regex": "^/api/crm/([^/]+?)/phone\\-numbers(?:/)?$",
+      "routeKeys": {
+        "nxtPclientSlug": "nxtPclientSlug"
+      },
+      "namedRegex": "^/api/crm/(?<nxtPclientSlug>[^/]+?)/phone\\-numbers(?:/)?$"
+    },
+    {
+      "page": "/api/ev/crm/projects/[slug]",
+      "regex": "^/api/ev/crm/projects/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/api/ev/crm/projects/(?<nxtPslug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/ev/settings/integrations/[id]",
+      "regex": "^/api/ev/settings/integrations/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/ev/settings/integrations/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/ev/voice/agents/[id]",
+      "regex": "^/api/ev/voice/agents/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/ev/voice/agents/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/ev/voice/agents/[id]/deploy",
+      "regex": "^/api/ev/voice/agents/([^/]+?)/deploy(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/ev/voice/agents/(?<nxtPid>[^/]+?)/deploy(?:/)?$"
+    },
+    {
+      "page": "/api/ev/voice/preview-sessions/[id]",
+      "regex": "^/api/ev/voice/preview\\-sessions/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/ev/voice/preview\\-sessions/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/crm/[clientSlug]",
+      "regex": "^/crm/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPclientSlug": "nxtPclientSlug"
+      },
+      "namedRegex": "^/crm/(?<nxtPclientSlug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/portal/[clientSlug]",
+      "regex": "^/portal/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPclientSlug": "nxtPclientSlug"
+      },
+      "namedRegex": "^/portal/(?<nxtPclientSlug>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/admin",
+      "regex": "^/admin(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin(?:/)?$"
+    },
+    {
+      "page": "/agents",
+      "regex": "^/agents(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/agents(?:/)?$"
+    },
+    {
+      "page": "/api/admin/embed-requests",
+      "regex": "^/api/admin/embed\\-requests(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/admin/embed\\-requests(?:/)?$"
+    },
+    {
+      "page": "/api/ev/backup/sync",
+      "regex": "^/api/ev/backup/sync(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/ev/backup/sync(?:/)?$"
+    },
+    {
+      "page": "/api/ev/contacts",
+      "regex": "^/api/ev/contacts(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/ev/contacts(?:/)?$"
+    },
+    {
+      "page": "/api/ev/crm/projects",
+      "regex": "^/api/ev/crm/projects(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/ev/crm/projects(?:/)?$"
+    },
+    {
+      "page": "/api/ev/crm/projects/auto",
+      "regex": "^/api/ev/crm/projects/auto(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/ev/crm/projects/auto(?:/)?$"
+    },
+    {
+      "page": "/api/ev/dashboard/overview",
+      "regex": "^/api/ev/dashboard/overview(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/ev/dashboard/overview(?:/)?$"
+    },
+    {
+      "page": "/api/ev/settings/integrations",
+      "regex": "^/api/ev/settings/integrations(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/ev/settings/integrations(?:/)?$"
+    },
+    {
+      "page": "/api/ev/settings/integrations/providers",
+      "regex": "^/api/ev/settings/integrations/providers(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/ev/settings/integrations/providers(?:/)?$"
+    },
+    {
+      "page": "/api/ev/settings/status",
+      "regex": "^/api/ev/settings/status(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/ev/settings/status(?:/)?$"
+    },
+    {
+      "page": "/api/ev/voice/agents",
+      "regex": "^/api/ev/voice/agents(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/ev/voice/agents(?:/)?$"
+    },
+    {
+      "page": "/api/ev/voice/calls",
+      "regex": "^/api/ev/voice/calls(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/ev/voice/calls(?:/)?$"
+    },
+    {
+      "page": "/api/ev/voice/calls/bulk",
+      "regex": "^/api/ev/voice/calls/bulk(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/ev/voice/calls/bulk(?:/)?$"
+    },
+    {
+      "page": "/api/ev/voice/calls/outbound",
+      "regex": "^/api/ev/voice/calls/outbound(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/ev/voice/calls/outbound(?:/)?$"
+    },
+    {
+      "page": "/api/ev/voice/calls/sync",
+      "regex": "^/api/ev/voice/calls/sync(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/ev/voice/calls/sync(?:/)?$"
+    },
+    {
+      "page": "/api/ev/voice/phone-numbers",
+      "regex": "^/api/ev/voice/phone\\-numbers(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/ev/voice/phone\\-numbers(?:/)?$"
+    },
+    {
+      "page": "/api/ev/voice/session-config",
+      "regex": "^/api/ev/voice/session\\-config(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/ev/voice/session\\-config(?:/)?$"
+    },
+    {
+      "page": "/api/ev/voice/voices",
+      "regex": "^/api/ev/voice/voices(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/ev/voice/voices(?:/)?$"
+    },
+    {
+      "page": "/api/ev/voice/voices/preview-config",
+      "regex": "^/api/ev/voice/voices/preview\\-config(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/ev/voice/voices/preview\\-config(?:/)?$"
+    },
+    {
+      "page": "/api/ev/voice/voices/sync",
+      "regex": "^/api/ev/voice/voices/sync(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/ev/voice/voices/sync(?:/)?$"
+    },
+    {
+      "page": "/api/ev/voice/webhooks",
+      "regex": "^/api/ev/voice/webhooks(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/ev/voice/webhooks(?:/)?$"
+    },
+    {
+      "page": "/auth",
+      "regex": "^/auth(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/auth(?:/)?$"
+    },
+    {
+      "page": "/auth/reset",
+      "regex": "^/auth/reset(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/auth/reset(?:/)?$"
+    },
+    {
+      "page": "/call-logs",
+      "regex": "^/call\\-logs(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/call\\-logs(?:/)?$"
+    },
+    {
+      "page": "/calls/bulk",
+      "regex": "^/calls/bulk(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/calls/bulk(?:/)?$"
+    },
+    {
+      "page": "/contacts",
+      "regex": "^/contacts(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/contacts(?:/)?$"
+    },
+    {
+      "page": "/create",
+      "regex": "^/create(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/create(?:/)?$"
+    },
+    {
+      "page": "/crm",
+      "regex": "^/crm(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/crm(?:/)?$"
+    },
+    {
+      "page": "/dashboard",
+      "regex": "^/dashboard(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard(?:/)?$"
+    },
+    {
+      "page": "/dialer",
+      "regex": "^/dialer(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dialer(?:/)?$"
+    },
+    {
+      "page": "/favicon.ico",
+      "regex": "^/favicon\\.ico(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/favicon\\.ico(?:/)?$"
+    },
+    {
+      "page": "/hot",
+      "regex": "^/hot(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/hot(?:/)?$"
+    },
+    {
+      "page": "/integrations",
+      "regex": "^/integrations(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/integrations(?:/)?$"
+    },
+    {
+      "page": "/numbers",
+      "regex": "^/numbers(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/numbers(?:/)?$"
+    },
+    {
+      "page": "/settings",
+      "regex": "^/settings(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/settings(?:/)?$"
+    },
+    {
+      "page": "/voices",
+      "regex": "^/voices(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/voices(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

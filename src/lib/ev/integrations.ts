@@ -87,7 +87,7 @@ const providers: IntegrationProviderDefinition[] = [
     badge: "M",
     category: "tool_providers",
     description: "Automate workflows with Make.com integration webhooks.",
-    mode: "eburon_credential",
+    mode: "eburon_credential" as any,
     eburonProvider: "make",
     fields: [
       { key: "teamId", label: "Team ID", type: "text", required: true, placeholder: "team_123..." },
@@ -108,7 +108,7 @@ const providers: IntegrationProviderDefinition[] = [
     badge: "G",
     category: "tool_providers",
     description: "CRM and marketing automation platform integration.",
-    mode: "eburon_credential",
+    mode: "eburon_credential" as any,
     eburonProvider: "gohighlevel",
     fields: [
       { key: "apiKey", label: "API Key", type: "password", required: true, placeholder: "ghl_live_..." },
@@ -125,7 +125,7 @@ const providers: IntegrationProviderDefinition[] = [
     badge: "S",
     category: "tool_providers",
     description: "Send messages and notifications to Slack channels.",
-    mode: "eburon_credential",
+    mode: "eburon_credential" as any,
     eburonProvider: "slack.oauth2-authorization",
     fields: [
       {
@@ -148,7 +148,7 @@ const providers: IntegrationProviderDefinition[] = [
     badge: "G",
     category: "tool_providers",
     description: "Manage calendar events and schedule appointments.",
-    mode: "eburon_credential",
+    mode: "eburon_credential" as any,
     eburonProvider: "google.calendar.oauth2-authorization",
     fields: [
       {
@@ -171,7 +171,7 @@ const providers: IntegrationProviderDefinition[] = [
     badge: "G",
     category: "tool_providers",
     description: "Read and write data to Google Sheets spreadsheets.",
-    mode: "eburon_credential",
+    mode: "eburon_credential" as any,
     eburonProvider: "google.sheets.oauth2-authorization",
     fields: [
       {
@@ -194,7 +194,7 @@ const providers: IntegrationProviderDefinition[] = [
     badge: "G",
     category: "tool_providers",
     description: "Advanced GoHighLevel integration with MCP protocol.",
-    mode: "eburon_credential",
+    mode: "eburon_credential" as any,
     eburonProvider: "ghl.oauth2-authorization",
     fields: [
       {
@@ -220,7 +220,7 @@ const providers: IntegrationProviderDefinition[] = [
     badge: "T",
     category: "vector_store_providers",
     description: "Vector search and semantic retrieval for AI applications.",
-    mode: "eburon_credential",
+    mode: "eburon_credential" as any,
     eburonProvider: "trieve",
     deprecated: true,
     fields: [
@@ -238,7 +238,7 @@ const providers: IntegrationProviderDefinition[] = [
     badge: "S",
     category: "phone_number_providers",
     description: "Bring your own SIP trunk or carrier for phone connectivity.",
-    mode: "eburon_credential",
+    mode: "eburon_credential" as any,
     eburonProvider: "byo-sip-trunk",
     fields: [
       {
@@ -269,7 +269,7 @@ const providers: IntegrationProviderDefinition[] = [
         placeholder: '{ "host": "sbc.example.com" }',
       },
     ],
-    buildVapiCredentialPayload: ({ name, config }) => {
+    buildEburonCredentialPayload: ({ name, config }) => {
       const payload: Record<string, unknown> = {
         provider: "byo-sip-trunk",
         gateways: requiredArray(parseJsonMaybe(config.gateways, "Gateways"), "Gateways"),
@@ -311,7 +311,7 @@ const providers: IntegrationProviderDefinition[] = [
     badge: "V",
     category: "phone_number_providers",
     description: "International phone numbers and communications API.",
-    mode: "eburon_credential",
+    mode: "eburon_credential" as any,
     eburonProvider: "vonage",
     fields: [
       { key: "apiKey", label: "API Key", type: "text", required: true, placeholder: "abcd1234" },
@@ -330,7 +330,7 @@ const providers: IntegrationProviderDefinition[] = [
     badge: "A",
     category: "cloud_providers",
     description: "Scalable cloud storage for recordings and artifacts.",
-    mode: "eburon_credential",
+    mode: "eburon_credential" as any,
     eburonProvider: "s3",
     fields: [
       {
@@ -352,7 +352,7 @@ const providers: IntegrationProviderDefinition[] = [
       { key: "s3PathPrefix", label: "Path Prefix", type: "text", required: true, defaultValue: "recordings/" },
       { key: "fallbackIndex", label: "Fallback Index", type: "number", placeholder: "0" },
     ],
-    buildVapiCredentialPayload: ({ name, config }) => {
+    buildEburonCredentialPayload: ({ name, config }) => {
       const payload: Record<string, unknown> = {
         provider: "s3",
         awsAccessKeyId: requiredString(config, "awsAccessKeyId", "AWS Access Key ID"),
@@ -387,7 +387,7 @@ const providers: IntegrationProviderDefinition[] = [
     badge: "A",
     category: "cloud_providers",
     description: "Enterprise cloud storage by Microsoft Azure.",
-    mode: "eburon_credential",
+    mode: "eburon_credential" as any,
     eburonProvider: "azure",
     fields: [
       {
@@ -417,7 +417,7 @@ const providers: IntegrationProviderDefinition[] = [
       },
       { key: "fallbackIndex", label: "Fallback Index", type: "number", placeholder: "0" },
     ],
-    buildVapiCredentialPayload: ({ name, config }) => {
+    buildEburonCredentialPayload: ({ name, config }) => {
       const payload: Record<string, unknown> = {
         provider: "azure",
         service: requiredString(config, "service", "Service"),
@@ -436,7 +436,7 @@ const providers: IntegrationProviderDefinition[] = [
     badge: "G",
     category: "cloud_providers",
     description: "Reliable object storage with global edge network.",
-    mode: "eburon_credential",
+    mode: "eburon_credential" as any,
     eburonProvider: "gcp",
     fields: [
       {
@@ -455,7 +455,7 @@ const providers: IntegrationProviderDefinition[] = [
       },
       { key: "fallbackIndex", label: "Fallback Index", type: "number", placeholder: "0" },
     ],
-    buildVapiCredentialPayload: ({ name, config }) => {
+    buildEburonCredentialPayload: ({ name, config }) => {
       const payload: Record<string, unknown> = {
         provider: "gcp",
         gcpKey: requiredObject(parseJsonMaybe(config.gcpKey, "GCP Key"), "GCP Key"),
@@ -473,7 +473,7 @@ const providers: IntegrationProviderDefinition[] = [
     badge: "C",
     category: "cloud_providers",
     description: "Zero-egress cloud storage with global distribution.",
-    mode: "eburon_credential",
+    mode: "eburon_credential" as any,
     eburonProvider: "cloudflare",
     fields: [
       { key: "accountId", label: "Account ID", type: "text", required: true, placeholder: "f82c..." },
@@ -487,7 +487,7 @@ const providers: IntegrationProviderDefinition[] = [
       },
       { key: "fallbackIndex", label: "Fallback Index", type: "number", placeholder: "0" },
     ],
-    buildVapiCredentialPayload: ({ name, config }) => {
+    buildEburonCredentialPayload: ({ name, config }) => {
       const payload: Record<string, unknown> = {
         provider: "cloudflare",
         accountId: requiredString(config, "accountId", "Account ID"),
@@ -506,7 +506,7 @@ const providers: IntegrationProviderDefinition[] = [
     badge: "S",
     category: "cloud_providers",
     description: "Open-source cloud storage with built-in authentication.",
-    mode: "eburon_credential",
+    mode: "eburon_credential" as any,
     eburonProvider: "supabase",
     fields: [
       {
@@ -517,7 +517,7 @@ const providers: IntegrationProviderDefinition[] = [
       },
       { key: "fallbackIndex", label: "Fallback Index", type: "number", placeholder: "0" },
     ],
-    buildVapiCredentialPayload: ({ name, config }) => {
+    buildEburonCredentialPayload: ({ name, config }) => {
       const payload: Record<string, unknown> = {
         provider: "supabase",
         name,
@@ -533,7 +533,7 @@ const providers: IntegrationProviderDefinition[] = [
     badge: "L",
     category: "observability_providers",
     description: "LLM observability, tracing, and analytics platform.",
-    mode: "eburon_credential",
+    mode: "eburon_credential" as any,
     eburonProvider: "langfuse",
     fields: [
       { key: "publicKey", label: "Public Key", type: "text", required: true, placeholder: "pk-lf-..." },
@@ -554,7 +554,7 @@ const providers: IntegrationProviderDefinition[] = [
     badge: "S",
     category: "server_configuration",
     description: "Configure custom server credentials and authentication.",
-    mode: "eburon_credential",
+    mode: "eburon_credential" as any,
     eburonProvider: "webhook",
     fields: [
       {
@@ -578,7 +578,7 @@ const providers: IntegrationProviderDefinition[] = [
 
 const providerByKey = new Map<string, IntegrationProviderDefinition>(providers.map((provider) => [provider.key, provider]));
 
-export type IntegrationProviderCatalogItem = Omit<IntegrationProviderDefinition, "buildVapiCredentialPayload"> & {
+export type IntegrationProviderCatalogItem = Omit<IntegrationProviderDefinition, "buildEburonCredentialPayload"> & {
   categoryLabel: string;
 };
 
@@ -598,7 +598,7 @@ export type IntegrationRecord = {
   providerBadge: string;
   description: string;
   mode: IntegrationMode;
-  vapiProvider: string | null;
+  eburonProvider: string | null;
   upstreamCredentialId: string | null;
   status: IntegrationStatus;
   deprecated: boolean;
@@ -731,7 +731,7 @@ export function serializeIntegrationRecord(integration: Integration): Integratio
     providerBadge: provider?.badge ?? safeProviderLabel.charAt(0).toUpperCase(),
     description: safeDescription,
     mode: integration.mode,
-    vapiProvider: integration.eburonProvider ?? provider?.eburonProvider ?? null,
+    eburonProvider: integration.eburonProvider ?? provider?.eburonProvider ?? null,
     upstreamCredentialId: integration.upstreamCredentialId ?? null,
     status: integration.status,
     deprecated: Boolean(provider?.deprecated),
