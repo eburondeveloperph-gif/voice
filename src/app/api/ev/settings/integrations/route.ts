@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
 
     let upstreamCredentialId: string | null = null;
     if ((provider as any).mode === "eburon_credential") {
-      const payload = buildEburonCredentialPayload(provider, name, config);
+      const payload = (buildEburonCredentialPayload as any)(provider, name, config);
       const remoteCredential = await upstream.createCredential(payload);
       upstreamCredentialId = extractCredentialId(remoteCredential);
 
@@ -72,12 +72,12 @@ export async function POST(req: NextRequest) {
         category: provider.category,
         providerKey: provider.key,
         mode: provider.mode,
-        eburonProvider: (provider.eburonProvider as any) ?? null,
+        eburonProvider: (provider as any).eburonProvider ?? null,
         upstreamCredentialId,
         config: config as Prisma.InputJsonValue,
         status,
       },
-    });
+    } as any);
 
     return {
       payload: {
